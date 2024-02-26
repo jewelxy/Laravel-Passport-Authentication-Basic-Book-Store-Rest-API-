@@ -39,19 +39,44 @@ class BookController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+    // public function store(Request $request)
+    // {
+    //     if (Auth::guard('api')->user()->usertype === 'admin') {
+    //         $result = BookModel::create([
+    //             "name" => $request->input('name'),
+    //             "description" => $request->input('description'),
+    //             "image" => $request->input('image'),
+    //         ]);
+    //         return response()->json($result, 201);
+    //     } else {
+    //         return response()->json(['data' => 'Unauthorized user submission'], 401);
+    //     }
+    // }
+
     public function store(Request $request)
-    {
-        if (Auth::guard('api')->user()->usertype === 'admin') {
-            $result = BookModel::create([
-                "name" => $request->input('name'),
-                "description" => $request->input('description'),
-                "image" => $request->input('image'),
-            ]);
-            return response()->json($result, 201);
-        } else {
-            return response()->json(['data' => 'Unauthorized user submission'], 401);
-        }
+{
+    if (Auth::guard('api')->user()->usertype === 'admin') {
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // adjust max size as needed
+        ]);
+
+        $image = $request->file('image');
+        $imageName = time().'.'.$image->getClientOriginalExtension();
+        $image->storeAs('public/images', $imageName);
+
+        $result = BookModel::create([
+            "name" => $validatedData['name'],
+            "description" => $validatedData['description'],
+            "image" => $imageName,
+        ]);
+        
+        return response()->json($result, 201);
+    } else {
+        return response()->json(['data' => 'Unauthorized user submission'], 401);
     }
+}
     
 
     /**

@@ -26,6 +26,23 @@ class UserController extends Controller
             ],200);
     }
 
+    /**
+     * User Deatils
+     * 
+     * Get user data formally
+     * $user = Auth::guard('api')->user();
+     * return Response(['data' => $user],200);
+     */
+
+    // public function getUserDetails(User $user)
+    // { 
+    //     if(Auth::guard('api')->check()){
+    //         $user = Auth::guard('api')->user();
+    //         return Response([$user],200);
+    //    }else{
+    //     return Response(['data' => 'Unauthorized'],401);
+    //    }
+    // }
     /*
     * Show all admin including user
     */
@@ -43,6 +60,26 @@ class UserController extends Controller
                 return Response(['data' => 'Unauthorized'], 401);
             }
     }
+
+/*
+* Try admin and user data excluding other admin
+*/
+    // public function getUserDetails(User $user)
+    // { 
+    //     if(Auth::guard('api')->check()){
+    //         $currentUser = Auth::guard('api')->user();
+    //         $adminData = User::where('id', $currentUser->id)->first();
+    //         $userData = User::where('usertype', 'user')->get();
+    //         $result = [$adminData];
+    //         foreach ($userData as $user) {
+    //             $result[] = $user;
+    //         }
+    //         return response()->json($result, 200);
+    //     } else {
+    //         return response()->json(['data' => 'Unauthorized'], 401);
+    //     }
+    // }
+
 
     /**
      * Logout
@@ -91,29 +128,6 @@ class UserController extends Controller
             return response()->json(['data' => 'Unauthenticated user'], 401);
         }
     }
-/*
-*Store user
-*/
-
-public function storeUser(Request $request)
-{
-    if (Auth::guard('api')->check()) {
-        if (Auth::guard('api')->user()->usertype === 'admin') {
-            $result = User::create([
-                "name" => $request->input('name'),
-                "email" => $request->input('email'),
-                "password" => bcrypt($request->input('password')),
-            ]);
-            return response()->json($result, 201);
-        } else {
-            return response()->json(['data' => 'Unauthorized user submission'], 401);
-        }
-    } else {
-        return response()->json(['data' => 'Unauthenticated user'], 401);
-    }
-}
-
-
 
      /*
     *update specified user from storage.
