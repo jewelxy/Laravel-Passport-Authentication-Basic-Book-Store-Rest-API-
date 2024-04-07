@@ -8,6 +8,10 @@ Loading composer repositories with package information
 Updating dependencies (including require-dev)
 Your requirements could not be resolved to an installable set of packages.
 ```
+
+### Solved issue 
+* Adding this line ```"laravel/passport": "^11.8"``` on composer.json file under ```require```
+* composer update
 ### Passport Configuration 
 * Migrate ```php artisan migrate```
 * Passport install ```php artisan passport:install```
