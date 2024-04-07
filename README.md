@@ -37,14 +37,29 @@ use HasApiTokens, HasFactory, Notifiable;
 ```
 * Configure route, and UserController and UserModel
 * Set Migration and seeder
-```
+* create seeder for user sedding depending migration table column name
 
-        \App\Models\User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-            'usertype'=>'admin',
-            'password'=>bcrypt(123456)
-        ]);
+* Import classs
+ ```
+use DB;
+use Carbon\Carbon;
+  ```
 ```
+   public function run(): void
+    {
+        DB::table('users')->insert(
+
+            [
+                    'name' => 'Admin User',
+                    'email' => 'admin@gmail.com',
+                    'usertype' => 'admin',
+                    'password'=>bcrypt(123456),
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now()
+            ]
+        );
+    }
+```
+* php artisan db:seed --classs=className
 * Replace Sanctum by ```use Laravel\Passport\HasApiTokens``` on user model
 
