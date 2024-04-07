@@ -21,7 +21,7 @@ Your requirements could not be resolved to an installable set of packages.
 ```
 use HasApiTokens, HasFactory, Notifiable;
 ```
-* Go to ```config.php``` and below code
+* Go to ```config/auth.php``` and below code
 ```
   'guards' => [
         'web' => [
