@@ -63,3 +63,12 @@ use Carbon\Carbon;
 * php artisan db:seed --classs=className
 * Replace Sanctum by ```use Laravel\Passport\HasApiTokens``` on user model
 
+
+## Project Features
+* Role-based user application
+* Package installation and service adding functionality
+* Two types of users included: Books Creator and Reader
+* Readers can only view and read books.
+* Creators can read, add, update, and delete books.
+* In the creator panel, only their book list and actions on this list of books are shown.
+* However, on the other hand, the creator is a reader for other publications.
