@@ -66,7 +66,7 @@ use Carbon\Carbon;
 
 ## Project Features
 * Role-based user application
-* Package installation, Repository, and Service-based application (Data not fetched from the modal but fetched by following the repository and service pattern).
+* Package installation.
 * Two types of users included: Books Creator and Reader
 * Readers can only view and read books.
 * Creators can read, add, update, and delete books.
