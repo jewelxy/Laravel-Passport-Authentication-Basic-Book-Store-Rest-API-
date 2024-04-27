@@ -15,7 +15,7 @@ Your requirements could not be resolved to an installable set of packages.
 ### Passport Configuration 
 * Migrate ```php artisan migrate```
 * Passport install ```php artisan passport:install```
-![alt text](image.png)
+<!----![alt text](image.png)---->
 
 * Insure those line on user model
 ```
